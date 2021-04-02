@@ -5,3 +5,4 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+carol = Application.create!(name: "Carol", street: "153 High Crest rd", city: "Pelham", state: "AL", zip_code: "35124", justification: "Big yard and I work from home")
