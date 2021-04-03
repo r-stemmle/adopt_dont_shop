@@ -16,3 +16,9 @@
   <%= link_to "Edit #{pet.name}", "/pets/#{pet.id}/edit" %>
   <%= link_to "Delete #{pet.name}", "/pets/#{pet.id}", method: :delete %>
 <% end %>
+
+<p>
+  <div class="pets-link">
+    <h3><%= link_to "Start an Application", new_application_path %></h3>
+  </div>
+</p>

@@ -1,6 +1,10 @@
-<%= @application.name %><br>
+<h2>Applicant:</h2><%= @application.name %><br>
+
 <%= @application.street %><br>
 <%= @application.city %><span>, </span><%= @application.state %>
 <span> </span><%= @application.zip_code %><br>
-<%= @application.justification %><br>
-<%= @application.status %>
+<p>Why I would make a good home: 
+  <%= @application.justification %><br>
+</p>
+
+<h3>Status: <%= @application.status %></h3>
