@@ -10,9 +10,15 @@ Shelter.destroy_all
 Pet.destroy_all
 
 
-shelter = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+aurora = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+arf = Shelter.create!(name: 'ARF', city: 'East Hampton, NY', foster_program: true, rank: 2)
 
 Application.create!(name: "Carol Smith", street: "153 High Crest rd", city: "Pelham", state: "AL", zip_code: "35124")
 
-Pet.create!(adoptable: true, age: 1, breed: 'sphynx', name: 'Lucille Bald', shelter_id: shelter.id)
-Pet.create!(adoptable: true, age: 3, breed: 'doberman', name: 'Lobster', shelter_id: shelter.id)
+Pet.create!(adoptable: true, age: 1, breed: 'sphynx', name: 'Lucille Bald', shelter_id: aurora.id)
+Pet.create!(adoptable: true, age: 3, breed: 'doberman', name: 'Lobster', shelter_id: aurora.id)
+
+aurora.pets.create!(adoptable: false, age: 7, breed: 'schnoodle', name: 'Carl')
+rug = arf.pets.create!(adoptable: true, age: 2, breed: 'mut', name: 'Rug')
+
+app_pet1 = rug.applications.create!(name: "Edward Jones", street: "12277 94 street", city: "Largo", state: "FL", zip_code: "33773")

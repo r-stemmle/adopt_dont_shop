@@ -1,5 +1,6 @@
 class ApplicationsController < ApplicationController
   def index
+    @applications = Application.all
   end
 
   def new
@@ -18,7 +19,14 @@ class ApplicationsController < ApplicationController
   end
 
   def show
-    @application = Application.find(params[:id])
+    if params[:query]
+      @application = Application.find(params[:id])
+      @pet = Pet.search(params[:query])
+      # binding.pry
+    else
+      @application = Application.find(params[:id])
+    end
+
   end
 
   def edit
