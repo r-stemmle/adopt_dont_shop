@@ -15,7 +15,7 @@ RSpec.describe 'application show page' do
   describe 'when I visit the applications show page' do
     context "for the first time" do
       it "it displays name, address, justification, pets, status" do
-        #dependencies: pets
+
         visit "/applications/#{@carol.id}"
 
         expect(page).to have_content(@carol.name)
@@ -41,6 +41,7 @@ RSpec.describe 'application show page' do
     context "I see the pet that I have searched for" do
       describe "Next to each pets name I see 'Adopt this pet' button" do
         it "I can click the button" do
+
           visit "/applications/#{@carol.id}"
 
           fill_in "Pets by name", with: 'Lucille Bald'
@@ -58,7 +59,7 @@ RSpec.describe 'application show page' do
 
         visit "applications/#{@carol.id}"
 
-        
+
 
         end
       end

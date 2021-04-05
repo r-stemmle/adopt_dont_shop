@@ -5,7 +5,7 @@ ruby '2.5.3'
 
 gem 'jquery-rails'
 
-gem 'bootstrap-sass'
+# gem 'bootstrap-sass'
 #Add json version to remedy the version error
 gem 'json', '>= 2.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
