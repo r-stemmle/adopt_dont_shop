@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   get '/', to: 'application#welcome'
 
   resources :applications do
-    resources :pets 
+    resources :pets
   end
+
+  post '/applications/add', to: 'applications#add'
 
   get '/shelters', to: 'shelters#index'
   get '/shelters/new', to: 'shelters#new'

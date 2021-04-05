@@ -21,7 +21,7 @@ class ApplicationsController < ApplicationController
   def show
     if params[:query]
       @application = Application.find(params[:id])
-      @pet = Pet.search(params[:query])
+      @pets = Pet.search(params[:query])
       # binding.pry
     else
       @application = Application.find(params[:id])
@@ -36,6 +36,13 @@ class ApplicationsController < ApplicationController
   end
 
   def destroy
+  end
+
+  def add
+    @application = Application.find(params[:application_id])
+    @pet = Pet.find(params[:id])
+    @application.pets << @pet
+    redirect_to application_path(@application)
   end
 
   private

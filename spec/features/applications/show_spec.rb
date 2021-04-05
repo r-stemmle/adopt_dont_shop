@@ -38,5 +38,31 @@ RSpec.describe 'application show page' do
       end
     end
 
+    context "I see the pet that I have searched for" do
+      describe "Next to each pets name I see 'Adopt this pet' button" do
+        it "I can click the button" do
+          visit "/applications/#{@carol.id}"
+
+          fill_in "Pets by name", with: 'Lucille Bald'
+          click_on "Search"
+          expect(page).to have_content('Lucille Bald')
+          click_on "Adopt this Pet"
+
+        end
+      end
+    end
+
+    context "I have clicked adopt this pet" do
+      describe "I am taken back to applications show page" do
+        it "displays the pet I want to adopt" do
+
+        visit "applications/#{@carol.id}"
+
+        
+
+        end
+      end
+    end
+
   end
 end
