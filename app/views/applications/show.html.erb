@@ -3,40 +3,44 @@
 <%= @application.street %><br>
 <%= @application.city %><span>, </span><%= @application.state %>
 <span> </span><%= @application.zip_code %><br>
-<p>Why I would make a good home:
-  <%= @application.justification %><br>
-</p>
-
-<% if @application.pets %>
-  <% @application.pets.each do |pet| %>
-    <%= pet.name %>
-  <% end %>
-<% end %>
-
 <p>Status: <%= @application.status %></p>
 
-<section>
-  <h3>Add a Pet to this Application</h3>
-
-  <%= form_with url: application_path(@application), method: :get do |form| %>
-  <%= form.label :query, "Pets by name:" %>
-  <%= form.text_field :query %>
-  <%= form.submit "Search" %>
-<% end %>
-</section>
-
-<section>
-  <% if @pets %>
-    <% @pets.each do |pet| %>
-    <div class="">
-      <h3><%= pet.name %></h3>
-      <%= button_to "Adopt this Pet", { action: "add", id: pet.id, application_id: @application } %>
-    </div>
-        <p>
-          <%= pet.age %><span> year old </span>
-          <%= pet.breed %><span> currently at </span>
-          <%= pet.shelter_name %>
-        </p>
+<div class="">
+  <% unless @application.pets.empty? %>
+    <% @application.pets.each do |pet| %>
+      <h4>Pets selected: <%= pet.name %></h4><br>
+    <% end %>
+    <%= form_with model: @application do |form| %>
+      <h4>Submit my application</h4>
+      <%= form.label :justification, "Why I'd make a good home:" %><br>
+      <%= form.text_area :justification %><br>
+      <%= form.submit "Submit" %>
     <% end %>
   <% end %>
-</section>
+</div>
+
+
+<% if @application.status == "In Progress" %>
+  <section>
+    <h3>Add a Pet to this Application</h3>
+    <%= form_with url: application_path(@application), method: :get do |form| %>
+      <%= form.label :query, "Pets by name:" %>
+      <%= form.text_field :query %>
+      <%= form.submit "Search" %>
+    <% end %>
+
+    <% if @pets %>
+      <% @pets.each do |pet| %>
+      <div class="">
+        <h3><%= pet.name %></h3>
+        <%= button_to "Adopt this Pet", { action: "add", id: pet.id, application_id: @application } %>
+      </div>
+          <p>
+            <%= pet.age %><span> year old </span>
+            <%= pet.breed %><span> currently at </span>
+            <%= pet.shelter_name %>
+          </p>
+      <% end %>
+    <% end %>
+  </section>
+<% end %>

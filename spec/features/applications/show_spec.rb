@@ -58,12 +58,32 @@ RSpec.describe 'application show page' do
         it "displays the pet I want to adopt" do
 
         visit "applications/#{@carol.id}"
-
-
-
+        fill_in "Pets by name", with: 'Lucille Bald'
+        click_on "Search"
+        expect(page).to have_content('Lucille Bald')
+        click_on "Adopt this Pet"
+        expect(page).to have_content('Lucille Bald')
         end
       end
     end
 
+    context "I have added pet(s) to the application" do
+      it "submit an application" do
+
+        visit "applications/#{@carol.id}"
+
+        fill_in "Pets by name", with: 'Lucille Bald'
+        click_on "Search"
+        expect(page).to have_content('Lucille Bald')
+        click_on "Adopt this Pet"
+        expect(page).to have_content('Submit my application')
+        fill_in "Why I'd make a good home", with: "I hate turtles"
+        click_on "Submit"
+        expect(current_path).to eq("/applications/#{@carol.id}")
+        expect(page).to have_content("Pending")
+        expect(page).to have_content('Lucille Bald')
+        expect(page).to have_no_content('Add a Pet to this Application')
+      end
+    end
   end
 end

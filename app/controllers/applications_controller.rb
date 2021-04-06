@@ -33,6 +33,11 @@ class ApplicationsController < ApplicationController
   end
 
   def update
+    @application = Application.find(params[:id])
+    @application.justification = application_params[:justification]
+    @application.status = "Pending"
+    @application.save
+    redirect_to application_path(@application)
   end
 
   def destroy

@@ -36,7 +36,6 @@ RSpec.describe "Starting an Application" do
           expect(page).to have_content("Pelham")
           expect(page).to have_content("AL")
           expect(page).to have_content("35124")
-          expect(page).to have_content("Why I would make a good home")
           expect(page).to have_content("In Progress")
         end
       end
