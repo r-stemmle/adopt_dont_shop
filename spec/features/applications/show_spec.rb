@@ -53,11 +53,26 @@ RSpec.describe 'application show page' do
       end
     end
 
+    context "And I search for Pets by name" do
+      it "I see any pet whose name PARTIALLY matches my search" do
+        fluffy = Pet.create!(name: "fluffy", age: 4, breed: "poodle", shelter_id: @shelter.id, adoptable: true )
+        fluff = Pet.create!(name: "fluff", age: 2, breed: "poodle", shelter_id: @shelter.id, adoptable: true )
+        mr_fluff = Pet.create!(name: "mr. fluff", age: 5, breed: "poodle", shelter_id: @shelter.id, adoptable: true )
+
+        visit "/applications/#{@carol.id}"
+        fill_in "Pets by name", with: 'fluff'
+        click_on "Search"
+        expect(page).to have_content('fluffy')
+        expect(page).to have_content('fluff')
+        expect(page).to have_content('mr. fluff')
+      end
+    end
+
     context "I have clicked adopt this pet" do
       describe "I am taken back to applications show page" do
         it "displays the pet I want to adopt" do
 
-        visit "applications/#{@carol.id}"
+        visit "/applications/#{@carol.id}"
         fill_in "Pets by name", with: 'Lucille Bald'
         click_on "Search"
         expect(page).to have_content('Lucille Bald')
