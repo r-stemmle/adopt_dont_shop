@@ -5,6 +5,10 @@ Rails.application.routes.draw do
 
   post '/applications/add', to: 'applications#add'
 
+  namespace :admin do
+    resources :shelters, :applications
+  end
+
   get '/shelters', to: 'shelters#index'
   get '/shelters/new', to: 'shelters#new'
   get '/shelters/:id', to: 'shelters#show', as: 'shelter'
