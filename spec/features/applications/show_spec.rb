@@ -68,6 +68,22 @@ RSpec.describe 'application show page' do
       end
     end
 
+    context "And I search for Pets by name" do
+      it "Then my search is case insensitive" do
+        fluffy = Pet.create!(name: "Fluffy", age: 4, breed: "poodle", shelter_id: @shelter.id, adoptable: true )
+        fluff = Pet.create!(name: "FLUFF", age: 2, breed: "poodle", shelter_id: @shelter.id, adoptable: true )
+        mr_fluff = Pet.create!(name: "Mr. FlUfF", age: 5, breed: "poodle", shelter_id: @shelter.id, adoptable: true )
+
+        visit "/applications/#{@carol.id}"
+        fill_in "Pets by name", with: 'fluff'
+        click_on "Search"
+        expect(page).to have_content('Fluffy')
+        expect(page).to have_content('FLUFF')
+        expect(page).to have_content('Mr. FlUfF')
+        save_and_open_page
+      end
+    end
+
     context "I have clicked adopt this pet" do
       describe "I am taken back to applications show page" do
         it "displays the pet I want to adopt" do
