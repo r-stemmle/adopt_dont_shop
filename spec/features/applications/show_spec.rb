@@ -80,7 +80,6 @@ RSpec.describe 'application show page' do
         expect(page).to have_content('Fluffy')
         expect(page).to have_content('FLUFF')
         expect(page).to have_content('Mr. FlUfF')
-        save_and_open_page
       end
     end
 
