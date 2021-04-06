@@ -1,0 +1,66 @@
+class ApplicationsController < ApplicationController
+  def index
+    @applications = Application.all
+  end
+
+  def new
+
+  end
+
+  def create
+    @application = Application.create(application_params)
+
+    if @application.valid?
+      redirect_to application_path(@application)
+    else
+      redirect_to new_application_path
+      flash[:alert] = "Error: #{error_message(@application.errors)}"
+    end
+  end
+
+  def show
+    if params[:query]
+      @application = Application.find(params[:id])
+      @pets = Pet.search(params[:query])
+      # binding.pry
+    else
+      @application = Application.find(params[:id])
+    end
+
+  end
+
+  def edit
+  end
+
+  def update
+    @application = Application.find(params[:id])
+    @application.justification = application_params[:justification]
+    @application.status = "Pending"
+    @application.save
+    redirect_to application_path(@application)
+  end
+
+  def destroy
+  end
+
+  def add
+    @application = Application.find(params[:application_id])
+    @pet = Pet.find(params[:id])
+    @application.pets << @pet
+    redirect_to application_path(@application)
+  end
+
+  private
+
+  def application_params
+    params.require(:application).permit(
+                  :id,
+                  :name,
+                  :street,
+                  :city,
+                  :state,
+                  :zip_code,
+                  :justification,
+                  :status)
+  end
+end

@@ -1,0 +1,4 @@
+<% @applications. each do |application| %>
+  <%= link_to application.name, application_path(application.id) %><br>
+  <%= application.street %><br>
+<% end %>
