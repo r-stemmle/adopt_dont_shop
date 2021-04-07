@@ -20,7 +20,16 @@ class Shelter < ApplicationRecord
   def self.order_by_reverse_alphabetical
     # binding.pry
     find_by_sql(
-      "select lower(name) as name, id, foster_program, city, rank, created_at, updated_at from shelters order by name desc;"
+      "SELECT lower(name) AS
+      name,
+      id,
+      foster_program,
+      city,
+      rank,
+      created_at,
+      updated_at
+      FROM shelters
+      ORDER BY name DESC;"
     )
   end
 
