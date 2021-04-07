@@ -17,8 +17,15 @@ RSpec.describe "Admin Shelters Index" do
     @shelter_3 = Shelter.create(name: 'Fancy pets of Colorado', city: 'Denver, CO', foster_program: true, rank: 10)
 
   }
-  describe "As a visitor" do
+  describe "As a visitor to admin shelters index" do
     it "I see all shelters listed reverse alphabetical by name" do
+      visit "/admin/shelters"
+
+
+      expect(page).to have_content(@shelter_2.name.downcase)
+      expect(page).to have_content(@shelter_3.name.downcase)
+      expect(page).to have_content(@shelter_1.name.downcase)
+
     end
   end
 end
