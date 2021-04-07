@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   post '/applications/add', to: 'applications#add'
 
   namespace :admin do
-    resources :shelters, :applications
+    resources :shelters, :applications, only: [:index, :show]
   end
 
   get '/shelters', to: 'shelters#index'
