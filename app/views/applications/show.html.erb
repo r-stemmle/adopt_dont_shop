@@ -33,7 +33,7 @@
       <% @pets.each do |pet| %>
       <div class="">
         <h3><%= pet.name %></h3>
-        <%= button_to "Adopt this Pet", { action: "add", id: pet.id, application_id: @application } %>
+        <%= button_to "Adopt this Pet", [:application_pets, id: pet.id, application_id: @application] %>
       </div>
           <p>
             <%= pet.age %><span> year old </span>
