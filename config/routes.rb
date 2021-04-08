@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :shelters, :applications, only: [:index, :show]
+    resources :shelters, :applications
   end
+
+  post '/admin/applications/:id', to: 'admin/applications#update'
 
   get '/shelters', to: 'shelters#index'
   get '/shelters/new', to: 'shelters#new'

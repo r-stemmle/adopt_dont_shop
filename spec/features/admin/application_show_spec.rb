@@ -14,9 +14,10 @@ RSpec.describe "visit admin application show page" do
     @rug = @shelter_1.pets.create!(adoptable: true, age: 2, breed: 'mut', name: 'Rug')
     @joe = @rug.applications.create!(name: "Joe", street: "123 nowhere", city: "sleepy", state: "TN", zip_code: 32322, justification: "I hate turtles", status: "Pending")
   }
-  it "I see a button to approve the application for that specific pet" do
+  it "I see a button to approve/reject the application for that specific pet" do
     visit "/admin/applications/#{@joe.id}"
 
     expect(page).to have_button("Approve")
+    expect(page).to have_button("Reject")
   end
 end

@@ -8,6 +8,7 @@
 Application.destroy_all
 Shelter.destroy_all
 Pet.destroy_all
+# ApplicationPet.destroy_all
 
 
 aurora = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)

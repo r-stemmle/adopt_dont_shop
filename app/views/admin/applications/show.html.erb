@@ -1,6 +1,6 @@
 <h2>Application Show Page</h2>
 
-<section>
+<section class="applicant">
   <p>
     <%= @application.name %><br>
     <%= @application.street %>
@@ -9,11 +9,13 @@
     <%= @application.zip_code %><br>
     <%= @application.justification %><br>
     <%= @application.status %><br>
+    <% @application.pets.each do |pet| %><br>
+      <%= pet.name %>
+      <%= button_to("Approve", {action: "update", form: "approve"}) %>
+      <%= button_to("Reject", {action: "update", form: "reject"}) %>
+    <% end %>
   </p>
 </section>
 
-<section>
-  <span>
-    <%= button_to "Approve", model: @application  %>
-  </span>
-</section>
+
+<!-- {"id"=>"1056", "controller"=>"applications_pets", "action"=>"create", "application_id"=>"229"} -->
