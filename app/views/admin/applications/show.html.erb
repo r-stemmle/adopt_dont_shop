@@ -14,12 +14,15 @@
 <section class="pet-answer">
   <% @application.pets.each do |application_pet| %>
     <div id="<%=application_pet.id%>">
-        <h4><%= application_pet.name %>-----</h4>
-        <%= application_pet.status %>
-        <% if application_pet.status == "awaiting adoption" %>
+
+      <h4><%= application_pet.name %>-----</h4>
+      <%= application_pet.application_status(@application) %>
+
+        <% if application_pet.application_status(@application) == "Pending" %>
           <%= button_to("Approve", application_pet_path(@application, application_pet.id), :params => {status: "approve"}, method: :patch) %>
           <%= button_to("Reject", application_pet_path(@application, application_pet.id), :params => {status: "reject"}, method: :patch) %>
         <% end %>
+          
     </div>
   <% end %>
 
