@@ -1,21 +1,26 @@
 <h2>Application Show Page</h2>
 
 <section class="applicant">
-  <p>
-    <%= @application.name %><br>
-    <%= @application.street %>
+    <span>NAME:  </span><%= @application.name %><br>
+    <span>ADDRESS: </span><%= @application.street %>
     <%= @application.city %>
     <%= @application.state %>
     <%= @application.zip_code %><br>
-    <%= @application.justification %><br>
-    <%= @application.status %><br>
-    <% @application.pets.each do |pet| %><br>
-      <%= pet.name %>
-      <%= button_to("Approve", {action: "update", form: "approve"}) %>
-      <%= button_to("Reject", {action: "update", form: "reject"}) %>
-    <% end %>
-  </p>
+    <span>WHY MY HOME?  </span><%= @application.justification %><br>
+    <span>STATUS: </span><%= @application.status %><br>
 </section>
 
+<h4>All Applications Pets:</h4>
+<section class="pet-answer">
+  <% @application.pets.each do |application_pet| %>
+    <div id="<%=application_pet.id%>">
+        <h4><%= application_pet.name %>-----</h4>
+        <%= application_pet.status %>
+        <% if application_pet.status == "awaiting adoption" %>
+          <%= button_to("Approve", application_pet_path(@application, application_pet.id), :params => {status: "approve"}, method: :patch) %>
+          <%= button_to("Reject", application_pet_path(@application, application_pet.id), :params => {status: "reject"}, method: :patch) %>
+        <% end %>
+    </div>
+  <% end %>
 
-<!-- {"id"=>"1056", "controller"=>"applications_pets", "action"=>"create", "application_id"=>"229"} -->
+</section>

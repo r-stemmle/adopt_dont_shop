@@ -47,5 +47,7 @@ RSpec.describe Pet, type: :model do
         expect(@pet_1.count_pending_applications).to eq(1)
       end
     end
+
+
   end
 end

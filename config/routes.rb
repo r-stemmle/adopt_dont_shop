@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :shelters, :applications
   end
 
-  post '/admin/applications/:id', to: 'admin/applications#update'
+  patch '/applications_pets/:id', to: 'applications_pets#update'
 
   get '/shelters', to: 'shelters#index'
   get '/shelters/new', to: 'shelters#new'
