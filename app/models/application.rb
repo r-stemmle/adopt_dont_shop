@@ -9,4 +9,15 @@ class Application < ApplicationRecord
     where(status: "Pending")
   end
 
+  def application_pet(pet_id)
+    applications_pets.find { |pet| pet.pet_id == pet_id }
+  end
+
+  def approved?
+      applications_pets.all? {|a| a.status == "Approved" }
+  end
+
+  def rejected?
+      applications_pets.any? {|a| a.status == "Rejected" }
+  end
 end

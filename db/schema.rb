@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_09_011135) do
+ActiveRecord::Schema.define(version: 2021_04_09_133629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,9 +27,10 @@ ActiveRecord::Schema.define(version: 2021_04_09_011135) do
     t.string "status", default: "In Progress"
   end
 
-  create_table "applications_pets", id: false, force: :cascade do |t|
+  create_table "applications_pets", force: :cascade do |t|
     t.bigint "application_id", null: false
     t.bigint "pet_id", null: false
+    t.string "status", default: "Pending"
     t.index ["application_id", "pet_id"], name: "index_applications_pets_on_application_id_and_pet_id"
   end
 
@@ -41,7 +42,6 @@ ActiveRecord::Schema.define(version: 2021_04_09_011135) do
     t.bigint "shelter_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "status", default: "awaiting adoption"
     t.index ["shelter_id"], name: "index_pets_on_shelter_id"
   end
 

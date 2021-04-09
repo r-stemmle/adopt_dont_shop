@@ -29,4 +29,23 @@ RSpec.describe Application, type: :model do
       end
     end
   end
+  describe 'instance methods' do
+    describe 'application_pet' do
+      it "returns pet associated with inquiry" do
+        expect(@kon.application_pet(@pet_1.id)).to be_instance_of(ApplicationsPet)
+      end
+    end
+
+    describe '.approved?' do
+      it "returns true if all the pets on an application have been approved" do
+        expect(@kon.approved?).to eq(false)
+      end
+    end
+
+    describe '.rejected?' do
+      it "returns true if any the pets on an application have been rejected" do
+        expect(@kon.rejected?).to eq(false)
+      end
+    end
+  end
 end

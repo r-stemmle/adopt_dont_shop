@@ -20,4 +20,8 @@ class Pet < ApplicationRecord
   def count_pending_applications
     applications.pending.count
   end
+
+  def application_status(applicant)
+    applications_pets.find { |a| a.application_id == applicant.id }.status
+  end
 end

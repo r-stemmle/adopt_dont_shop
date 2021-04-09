@@ -1,13 +1,5 @@
 require 'rails_helper'
-# Approving a Pet for Adoption
-#
-# As a visitor
-# When I visit an admin application show page ('/admin/applications/:id')
-# For every pet that the application is for, I see a button to approve the application for that specific pet
-# When I click that button
-# Then I'm taken back to the admin application show page
-# And next to the pet that I approved, I do not see a button to approve this pet
-# And instead I see an indicator next to the pet that they have been approved
+
 RSpec.describe "admin application show page" do
   before {
     @shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
@@ -23,7 +15,6 @@ RSpec.describe "admin application show page" do
       within ".pet-answer" do
         expect(page).to have_button("Approve")
         expect(page).to have_button("Reject")
-        save_and_open_page
       end
     end
 
@@ -37,6 +28,9 @@ RSpec.describe "admin application show page" do
           expect(page).to have_button("Reject")
           click_on "Approve"
           expect(current_path).to eq("/admin/applications/#{@joe.id}")
+          expect(page).to_not have_button("Approve")
+          expect(page).to_not have_button("Reject")
+          expect(page).to have_content("Approved")
         end
       end
     end
@@ -51,8 +45,38 @@ RSpec.describe "admin application show page" do
           expect(page).to have_button("Reject")
           click_on "Reject"
           expect(current_path).to eq("/admin/applications/#{@joe.id}")
+          expect(page).to_not have_button("Approve")
+          expect(page).to_not have_button("Reject")
+          expect(page).to have_content("Rejected")
         end
       end
     end
+  end
+
+  describe "All pets accepted on an application" do
+    it "I am taken back to the page and the applications status is approved" do
+      visit "/admin/applications/#{@joe.id}"
+
+      within "##{@rug.id}" do
+        expect(page).to have_content("Rug")
+        expect(page).to have_button("Approve")
+        expect(page).to have_button("Reject")
+        click_on "Approve"
+      end
+      within "##{@cat.id}" do
+        expect(page).to have_content("Cat")
+        expect(page).to have_button("Approve")
+        expect(page).to have_button("Reject")
+        click_on "Approve"
+      end
+
+      within ".applicant" do
+        expect(page).to have_content("Approved")
+      end
+    end
+    #     When I visit an admin application show page
+    # And I approve all pets for an application
+    # Then I am taken back to the admin application show page
+    # And I see the application's status has changed to "Approved"
   end
 end

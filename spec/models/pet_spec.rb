@@ -48,6 +48,11 @@ RSpec.describe Pet, type: :model do
       end
     end
 
+    describe '.application_status' do
+      it "returns the status of application for given applicant" do
+        expect(@pet_1.application_status(@kon)).to eq("Pending")
+      end
+    end
 
   end
 end
