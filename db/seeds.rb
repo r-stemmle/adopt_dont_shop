@@ -8,10 +8,15 @@
 Application.destroy_all
 Shelter.destroy_all
 Pet.destroy_all
+# ApplicationPet.destroy_all
 
 
 aurora = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
 arf = Shelter.create!(name: 'ARF', city: 'East Hampton, NY', foster_program: true, rank: 2)
+
+Shelter.create(name: 'SPCA', city: 'Largo, CO', foster_program: true, rank: 1)
+Shelter.create(name: 'baggies', city: 'Harlingen, TX', foster_program: false, rank: 5)
+Shelter.create(name: 'FANCY pets of Colorado', city: 'Denver, CO', foster_program: true, rank: 10)
 
 Application.create!(name: "Carol Smith", street: "153 High Crest rd", city: "Pelham", state: "AL", zip_code: "35124")
 

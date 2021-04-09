@@ -15,8 +15,8 @@ RSpec.describe Shelter, type: :model do
 
   before(:each) do
     @shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
-    @shelter_2 = Shelter.create(name: 'RGV animal shelter', city: 'Harlingen, TX', foster_program: false, rank: 5)
-    @shelter_3 = Shelter.create(name: 'Fancy pets of Colorado', city: 'Denver, CO', foster_program: true, rank: 10)
+    @shelter_2 = Shelter.create(name: 'baggies', city: 'Harlingen, TX', foster_program: false, rank: 5)
+    @shelter_3 = Shelter.create(name: 'FANCY pets of Colorado', city: 'Denver, CO', foster_program: true, rank: 10)
 
     @pet_1 = @shelter_1.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: false)
     @pet_2 = @shelter_1.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
@@ -40,6 +40,12 @@ RSpec.describe Shelter, type: :model do
     describe '#order_by_number_of_pets' do
       it 'orders the shelters by number of pets they have, descending' do
         expect(Shelter.order_by_number_of_pets).to eq([@shelter_1, @shelter_3, @shelter_2])
+      end
+    end
+
+    describe '#order_by_reverse_alphabetical' do
+      it 'orders the shelters by alphabetical, reverse' do
+        expect(Shelter.order_by_reverse_alphabetical).to eq([@shelter_3, @shelter_2, @shelter_1])
       end
     end
   end
