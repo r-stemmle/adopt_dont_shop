@@ -19,6 +19,7 @@ RSpec.describe Pet, type: :model do
     @pet_2 = @shelter_1.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
     @pet_3 = @shelter_1.pets.create(name: 'Ann', breed: 'ragdoll', age: 3, adoptable: false)
     @kon = @pet_1.applications.create!(name: "Kon", street: "123 nowhere", city: "sleepy", state: "TN", zip_code: 32322, justification: "I hate turtles", status: "Pending")
+    # @kon << @pet_2
   end
 
   describe 'class methods' do

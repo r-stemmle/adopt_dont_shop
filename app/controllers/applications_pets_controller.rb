@@ -9,16 +9,29 @@ class ApplicationsPetsController < ApplicationController
 
   def update
     application = Application.find(params[:application_id])
-    pet = application.application_pet(params[:id].to_i)
+    line_item = application.application_pet(params[:id].to_i)
     if params[:status] == 'approve'
-      pet.status = "Approved"
+      line_item.status = "Approved"
       application.status = "Approved" if application.approved?
     else
-      pet.status = "Rejected"
+      line_item.status = "Rejected"
       application.status = "Rejected" if application.rejected?
     end
-    pet.save
+    line_item.save
     application.save
     redirect_to admin_application_path(application)
   end
+
+  # def update_application
+  #   application.update_status
+  #   update_pet if some scenario
+  # end
+
+  def update_pet
+    pet.update_adoptable
+  end
+
+
+
+
 end

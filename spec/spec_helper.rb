@@ -97,3 +97,6 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+RSpec.configure do |c|
+  c.example_status_persistence_file_path = "examples.txt"
+end

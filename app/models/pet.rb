@@ -22,6 +22,10 @@ class Pet < ApplicationRecord
   end
 
   def application_status(applicant)
-    applications_pets.find { |a| a.application_id == applicant.id }.status
+    applications_pets.joins(:application)
+                     .where("application_id = #{applicant.id}")
+                      .pluck(:status)
+                      .first
+
   end
 end

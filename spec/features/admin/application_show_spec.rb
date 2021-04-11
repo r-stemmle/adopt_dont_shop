@@ -74,9 +74,34 @@ RSpec.describe "admin application show page" do
         expect(page).to have_content("Approved")
       end
     end
-    #     When I visit an admin application show page
-    # And I approve all pets for an application
-    # Then I am taken back to the admin application show page
-    # And I see the application's status has changed to "Approved"
+
+    describe "Application approval makes Pets not adoptable" do
+      context "When I approve all pets on an application" do
+        it "I visit the show pages for those pets" do
+          visit "/admin/applications/#{@joe.id}"
+
+          within "##{@rug.id}" do
+            expect(page).to have_content("Rug")
+            expect(page).to have_button("Approve")
+            expect(page).to have_button("Reject")
+            click_on "Approve"
+          end
+          within "##{@cat.id}" do
+            expect(page).to have_content("Cat")
+            expect(page).to have_button("Approve")
+            expect(page).to have_button("Reject")
+            click_on "Approve"
+          end
+
+          within ".applicant" do
+            expect(page).to have_content("Approved")
+          end
+
+          visit "/pets/#{@rug.id}"
+          expect(page).to have_content("false")
+        end
+      end
+    end
+
   end
 end

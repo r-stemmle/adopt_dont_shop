@@ -47,5 +47,11 @@ RSpec.describe Application, type: :model do
         expect(@kon.rejected?).to eq(false)
       end
     end
+
+    describe ".update_status" do
+      it "changes the status of an application" do
+        
+      end
+    end
   end
 end
